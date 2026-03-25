@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - SecurePay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Using the user background image */
+            background-image: url("{{ url_for('static', filename='img/userbg.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; /* Ensure text is visible on the dark background */
+        }
+
+        .dashboard-wrapper {
+            min-height: 100vh;
+            background-color: rgba(30, 38, 88, 0.7); /* Dark overlay with transparency */
+            padding-top: 80px; /* Adjusted for fixed navbar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 20px; /* Add some padding at the bottom */
+        }
+
+        .navbar {
+            background-color: rgba(30, 38, 88, 0.5) !important; /* Glassy dark navbar */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: #fff !important;
+        }
+
+        .dashboard-card {
+            /* Default card styling */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px; /* Matching border-radius from admin page */
+            padding: 2rem;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            transition: all 0.4s ease; /* Smoother transition */
+            height: 100%; 
+            margin-bottom: 30px; 
+        }
+
+        /* * UPDATED HOVER EFFECT: 
+         * This block has been replaced with the style from your admin.html.
+         * It now applies the pink-and-yellow gradient and a more pronounced transform.
+        */
+        .dashboard-card:hover {
+            background: linear-gradient(45deg, rgba(249, 91, 154, 0.8), rgba(249, 212, 35, 0.8));
+            transform: translateY(-10px) scale(1.05); /* Added slight scale for more pop */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dashboard-card .icon {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card .icon img {
+            width: 80px; 
+            height: 80px;
+            border-radius: 50%; /* Circular icons */
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .dashboard-card:hover .icon img {
+            transform: scale(1.1); /* Icon also grows on hover */
+        }
+        
+        .dashboard-card h3, .dashboard-card p {
+            color: #fff !important; 
+        }
+
+        .dashboard-card h3 {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-card p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Welcome, {{ user.full_name }}</a>
+            <div>
+                <a href="{{ url_for('merchant_setup') }}" class="btn btn-outline-light me-2">Become a Merchant</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-light">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-wrapper">
+        <div class="container">
+            <h2 class="text-center mb-5">User Dashboard</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <a href="{{ url_for('user_profile_page') }}" class="dashboard-card">
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Profile">
+                        </div>
+                        <h3>Your Profile</h3>
+                        <p>View and manage your account details.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="{{ url_for('user_make_payment_page') }}" class="dashboard-card">
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='img/pay1.png') }}" alt="Make a Payment">
+                        </div>
+                        <h3>Make a Payment</h3>
+                        <p>Initiate new UPI transactions securely.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="{{ url_for('user_transactions_page') }}" class="dashboard-card">
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='img/transaction.png') }}" alt="Transaction History">
+                        </div>
+                        <h3>Transaction History</h3>
+                        <p>Review all your past transactions.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

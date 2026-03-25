@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Setup - SecurePay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Using the new merchant background */
+            background-image: url("{{ url_for('static', filename='img/merchantbg.png') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+            color: #fff;
+        }
+
+        .main-wrapper {
+            display: flex;
+            width: 100%;
+            max-width: 950px;
+            min-height: 550px;
+            /* Glassy container effect */
+            background: rgba(10, 25, 47, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            overflow: hidden;
+        }
+
+        .image-panel {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .image-panel img {
+            max-width: 220px;
+            margin-bottom: 1rem;
+        }
+
+        .image-panel h2 {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-panel {
+            flex: 1.5;
+            padding: 2rem 3rem;
+            /* Dual-color gradient from your reference image */
+            background: linear-gradient(135deg, rgba(66, 81, 255, 0.8), rgba(255, 102, 193, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-control, .form-select {
+            background: rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+        }
+
+        .form-control::placeholder { color: #ddd; }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            border-color: #fff;
+            box-shadow: none;
+        }
+
+        .form-select option {
+            background: #2a3a64;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: #333;
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #eee;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        @media (max-width: 992px) {
+            .main-wrapper {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            .image-panel {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="image-panel">
+            <!-- Using the new merchant4.png image -->
+            <img src="{{ url_for('static', filename='img/mercchant4.png') }}" alt="Merchant Icon">
+            <h2>Become a Merchant</h2>
+        </div>
+        <div class="form-panel">
+            <h3 class="mb-3 text-center fw-bold">Setup Your Account</h3>
+            <p class="text-center text-white-50 mb-4">Complete your profile to start receiving payments.</p>
+            <form action="/merchant/setup" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Create a Unique UPI Number</label>
+                    <input type="text" name="upi_number" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Seller Category</label>
+                    <select name="category" class="form-select" required>
+                        <option value="0">Entertainment</option>
+                        <option value="1">Food Dining</option>
+                        <option value="2">Gas Transport</option>
+                        <option value="3">Grocery NET</option>
+                        <option value="4">Grocery POS</option>
+                        <option value="5">Health Fitness</option>
+                        <option value="6">Home</option>
+                        <option value="7">Kids Pets</option>
+                        <option value="8">Miscellaneous NET</option>
+                        <option value="9">Miscellaneous POS</option>
+                        <option value="10">Personal Care</option>
+                        <option value="11">Shopping NET</option>
+                        <option value="12">Shopping POS</option>
+                        <option value="13">Travel</option>
+                    </select>
+                </div>
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Complete Setup</button>
+                    <a href="{{ url_for('user_dashboard') }}" class="btn btn-secondary btn-lg mt-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
